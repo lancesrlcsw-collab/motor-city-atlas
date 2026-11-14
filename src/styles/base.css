@@ -1,0 +1,114 @@
+:root {
+  --bg: #03070d;
+  --panel: rgba(6, 14, 23, 0.84);
+  --panel-solid: #07121d;
+  --panel-raised: rgba(18, 34, 50, 0.72);
+  --line: rgba(150, 200, 240, 0.14);
+  --line-strong: rgba(150, 200, 240, 0.3);
+  --text: #eaf2f8;
+  --text-2: #a9bccb;
+  --text-3: #74889c;
+  --blue: #0a84cf;
+  --blue-bright: #3db8ff;
+  --silver: #c3ccd4;
+  --gold: #f2c14e;
+  --good: #3ddc97;
+  --warn: #ffc247;
+  --bad: #ff5a5f;
+  /* Chart palette, validated for colour-vision separation and contrast on the panel surface. */
+  --viz-surface: #07121d;
+  --viz-1: #3987e5;
+  --viz-2: #d95926;
+  --viz-3: #199e70;
+  --viz-money: #d99a2b;
+  --viz-quiet: #5b6878;
+  --viz-grid: rgba(150, 200, 240, 0.12);
+  --viz-axis: rgba(150, 200, 240, 0.26);
+  --div-hi2: #4f97ea;
+  --div-hi1: #2f6fb8;
+  --div-mid: #5b6878;
+  --div-lo1: #a8573f;
+  --div-lo2: #e8684a;
+  --font-display: 'Saira Extra Condensed', 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --font-label: 'Saira Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --radius: 14px;
+  --topbar-h: 60px;
+  --dossier-w: min(520px, 42vw);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: var(--blue-bright); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3, h4, p { margin: 0; }
+:focus-visible { outline: 2px solid var(--blue-bright); outline-offset: 2px; border-radius: 6px; }
+
+.app { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.scene { position: absolute !important; inset: 0; touch-action: none; }
+
+/* Shared type roles */
+.eyebrow { font-family: var(--font-label); font-weight: 600; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); }
+.display { font-family: var(--font-display); font-weight: 700; letter-spacing: 0.01em; line-height: 0.95; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--text-2); }
+.faint { color: var(--text-3); }
+
+.glass {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-label); font-weight: 600; font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--text-2); white-space: nowrap;
+}
+.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.ok { color: var(--good); border-color: rgba(61, 220, 151, 0.4); }
+.pill.warn { color: var(--warn); border-color: rgba(255, 194, 71, 0.45); }
+.pill.out { color: var(--bad); border-color: rgba(255, 90, 95, 0.45); }
+.pill.muted { color: var(--text-3); }
+
+/* Scrollbars inside panels */
+.scroll { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(150, 200, 240, 0.25) transparent; }
+.scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll::-webkit-scrollbar-thumb { background: rgba(150, 200, 240, 0.22); border-radius: 8px; }
+
+/* Loading / error screens */
+.loader {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center; pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(3, 7, 13, 0) 0%, rgba(3, 7, 13, 0.9) 70%);
+  transition: opacity 0.8s ease;
+}
+.loader.done { opacity: 0; }
+.loader h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(44px, 9vw, 112px); letter-spacing: 0.02em; line-height: 0.9; }
+.loader h1 span { color: var(--blue-bright); }
+.loader p { margin-top: 14px; font-family: var(--font-label); letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-2); font-size: 13px; }
+.loader .bar { width: 180px; height: 2px; margin: 22px auto 0; background: rgba(150, 200, 240, 0.18); overflow: hidden; border-radius: 2px; }
+.loader .bar::after { content: ''; display: block; width: 40%; height: 100%; background: var(--blue-bright); animation: slide 1.1s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(260%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
