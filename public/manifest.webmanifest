@@ -1,0 +1,15 @@
+{
+  "name": "Motor City Atlas",
+  "short_name": "MC Atlas",
+  "description": "An unofficial interactive 3D model of the 2026 Detroit Lions roster.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#03070d",
+  "theme_color": "#03070d",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

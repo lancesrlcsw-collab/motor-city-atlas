@@ -29,7 +29,7 @@ const walk = async (dir) => (await Promise.all((await fs.readdir(dir, { withFile
 const files = []
 for (const file of await walk(DIR)) {
   const rel = path.relative(DIR, file).split(path.sep).join('/')
-  if (rel.endsWith('.woff') || rel === 'og.jpg' || rel === 'favicon.svg' || rel === 'index.html') { await fs.rm(file); continue }
+  if (rel.endsWith('.woff') || rel === 'og.jpg' || rel === 'favicon.svg' || rel === 'manifest.webmanifest' || rel.startsWith('icon-') || rel === 'index.html') { await fs.rm(file); continue }
   if (rel !== 'page.html' && rel !== 'files.json') files.push(rel)
 }
 await fs.writeFile(path.join(DIR, 'files.json'), JSON.stringify(files.sort()))
